@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: black;
+    color: white;
+}
+
+.login-container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px red;
+    text-align: center;
+}
+
+h1 {
+    color: red;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px red;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    text-shadow: 0 0 5px red;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid red;
+    border-radius: 5px;
+    background: black;
+    color: white;
+    outline: none;
+    box-shadow: 0 0 10px red;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: red;
+    color: black;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px red;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: black;
+    color: red;
+    box-shadow: 0 0 20px red;
+}

